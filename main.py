@@ -1,9 +1,2 @@
-total_sum = 0
-
-while True:
-    number = int(input("Enter a number (0 to stop): "))
-    if number == 0:
-        break
-    total_sum += number
-
-print(f"The total sum is {total_sum}")
+# Creating a list
+my_list = [1, 2, 3, 'a', 'b', 'c']
