@@ -1,0 +1,9 @@
+2024-08-09 11:45:32 INFO: Application started successfully
+2024-08-09 11:45:35 DEBUG: Config file loaded: config.json
+2024-08-09 11:45:37 WARNING: Database connection failed: Connection refused
+2024-08-09 11:45:39 ERROR: Critical error occurred: NullPointerException
+2024-08-09 11:45:41 INFO: Database connection established
+2024-08-09 11:45:43 DEBUG: User 'john_doe' logged in
+2024-08-09 11:45:45 INFO: Data processed successfully
+2024-08-09 11:45:47 WARNING: File not found: data.csv
+2024-08-09 11:45:49 ERROR: Application terminated unexpectedly
