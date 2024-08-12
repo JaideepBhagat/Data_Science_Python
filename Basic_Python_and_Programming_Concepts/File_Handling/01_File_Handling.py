@@ -4,12 +4,12 @@ try:
 
     file = open("Example.txt", 'r')  # Opens the file in read mode
 
-    content = file.read()  # Reads entire content of the file
+    #content = file.read()  # Reads entire content of the file
     line = file.readline()  # Reads one line from the file
     lines = file.readlines()  # Reads all lines into a list
 
     print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-    print(content)
+    #print(content)
     print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
     print(line)
     print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
