@@ -16,7 +16,7 @@ print("Length: ", length)
 first_char = "Hello"[0]
 print("First Character: ", first_char)
 
-# Slicing Strings
+# Slicing String`s
 sub_string = "Hello, Jaideep"[0:5]
 print("Slicing: ", sub_string)
 
