@@ -1,6 +1,4 @@
 import numpy as np
-from mpmath import matrix
-from numba.np.arraymath import array_prod
 
 array_1D = np.array([1, 2, 3, 4, 5])
 array_2D_1 = np.array([[1, 2, 3],[4, 5, 6]])
