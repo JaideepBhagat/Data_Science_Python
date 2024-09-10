@@ -2,13 +2,13 @@ import pandas as pd
 
 nums = [5, 6, 7]
 
-# Creating Panda Series
-series = pd.Series(nums)
-
-print(series)
-
-# Accessing elements from Series
-print("Second Element:", series[1])
+# # Creating Panda Series
+# series = pd.Series(nums)
+#
+# print(series)
+#
+# # Accessing elements from Series
+# print("Second Element:", series[1])
 
 # Creating Panda Series with index
 series = pd.Series(nums, index = ['a','b','c'])
