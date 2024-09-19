@@ -16,7 +16,7 @@ df2 = pd.DataFrame(data2, index=['P4', 'P5', 'P6'])
 df = pd.concat([df1, df2])
 
 print(df)
-
+print("--------------------------------------")
 # Grouping data by a columnn
 grouped = df.groupby('City')['Age'].mean()
 print("Grouped data:\n", grouped)
