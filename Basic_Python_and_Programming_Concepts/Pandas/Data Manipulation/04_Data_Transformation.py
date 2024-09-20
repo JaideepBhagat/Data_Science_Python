@@ -14,8 +14,10 @@ print("--------------------------")
 def add_five(x):
     return x + 5
 
+
 def increase_10percent(x):
     return x * 1.1
+
 
 # Applying a function to a column
 df['Age'] = df['Age'].apply(add_five)
