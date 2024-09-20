@@ -36,3 +36,8 @@ df['Revised_Salary'] = df['Salary'].map(increase_10percent)
 print(df)
 print('--------------------------')
 
+# Using .applymap()
+df[['Increased_Age','Revised_Salary']] = df[['Age','Salary']].applymap(increase_10percent)
+
+print(df)
+print('--------------------------')
