@@ -1,35 +1,33 @@
 import pandas as pd
 
+df = pd.DataFrame({
+    'Date': ['2024-01-01', '2024-01-01','2024-01-02', '2024-01-02'],
+    'City': ['NYC', 'LA', 'NYC', 'LA'],
+    'Temperature': [30, 50, 27, 45],
+})
+
 # Using pivot() function to reshape the data
-
-data = {'Name': ['Alice', 'Bob', 'Charlie', 'Dave', 'Eve', 'Frank', 'Grace', 'Henry', 'Ivy', 'Jack'],
-    'Age': [25, 30, 35, 28, 32, 36, 29, 33, 27, 31],
-    'City': ['New York', 'London', 'Paris', 'Berlin', 'London', 'Paris', 'London', 'New York', 'Paris', 'London']}
-
-df = pd.DataFrame(data)
-
-# Reshape the data using pivot()
-df_pivot = df.pivot(index='Name', columns='City', values='Age')
-print(df_pivot)
+pivoted = df.pivot(index='Date', columns='City', values='Temperature')
+print(pivoted)
 print("--------------------------")
 
 # Using pivot_table() function to reshape the data
 sales_data = pd.read_excel("Superstore.xls", sheet_name="Orders")
 df = pd.DataFrame(sales_data)
 # Reshape the data using pivot()
-df_salespivot = df.pivot_table(index='State', columns='Segment', values='Quantity', aggfunc='sum')
+df_salespivot = df.pivot_table(index='State', columns='Segment', values='Quantity', aggfunc='count')
 print(df_salespivot)
 print("--------------------------")
 
 # Using melt() function to reshape the data
 
-melted = pd.melt(df_salespivot, var_name='Segment', value_name='Quantity')
+melted = pd.melt(pivoted, var_name='City', value_name='Temperature')
 
 print(melted)
 print("--------------------------")
 
 # Using stack() function to reshape the data
-stacked = df.stack()
+stacked = pivoted.stack()
 print(stacked)
 print("--------------------------")
 stacked.to_excel("stacked.xlsx")
