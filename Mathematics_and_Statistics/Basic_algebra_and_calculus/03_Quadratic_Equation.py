@@ -22,8 +22,8 @@ plt.ylabel('y')
 # Highlight the roots (x = 1 and x = 3)
 plt.axhline(0, color='black',linewidth=1)
 plt.axvline(0, color='black',linewidth=1)
-#plt.axvline(1, color='red', linestyle='--', label="Root at x = 1")
-#plt.axvline(3, color='blue', linestyle='--', label="Root at x = 3")
+plt.axvline(1, color='red', linestyle='--', label="Root at x = 1")
+plt.axvline(3, color='blue', linestyle='--', label="Root at x = 3")
 
 # Add a legend
 plt.legend()

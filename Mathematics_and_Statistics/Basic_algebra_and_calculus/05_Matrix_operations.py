@@ -25,7 +25,3 @@ print("---------------")
 F = A @ B
 print(F)
 print("---------------")
-
-# Matrix Division
-G = A / B
-print(G)
