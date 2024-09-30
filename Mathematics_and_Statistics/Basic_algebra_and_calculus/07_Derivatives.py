@@ -8,3 +8,12 @@ def derivative(f, x, h=1e-5):
 
 x_value = 2
 print("Derivative of f(x) at x=2:", derivative(f, x_value))
+
+# Gradient Descent
+def gradient_descent(f, x, learning_rate=0.1, num_iterations=100):
+    for i in range(num_iterations):
+        gradient = derivative(f, x)
+        x -= learning_rate * gradient
+    return x
+
+print("Gradient Descent of f(x) at x=2:", gradient_descent(f, x_value))

@@ -20,8 +20,3 @@ print("---------------")
 E = np.dot(A, B)
 print(E)
 print("---------------")
-
-# Matrix multiplication
-F = A @ B
-print(F)
-print("---------------")
