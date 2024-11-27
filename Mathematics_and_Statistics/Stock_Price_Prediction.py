@@ -40,7 +40,7 @@ def predict_next_day(model, last_day_index):
 # Main function
 def main():
     # Parameters
-    ticker = "NETWORK18.NS"
+    ticker = "TRITURBINE.NS"
     # one year ago as start date
     start_date = today() - pd.Timedelta(days=365)
     # today's date as end date

@@ -5,7 +5,7 @@ from dateutil.utils import today
 from statsmodels.tsa.seasonal import seasonal_decompose
 
 # Download historical stock data from Yahoo Finance
-ticker = 'ZOMATO.NS'
+ticker = 'TRITURBINE.NS'
 start_date = today() - pd.Timedelta(days=365 * 3)  # 2 years of data
 end_date = today()  # Current date
 
