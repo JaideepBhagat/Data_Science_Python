@@ -7,11 +7,10 @@ import os
 path = kagglehub.dataset_download("sakshisatre/tips-dataset")
 
 tips = pd.read_csv(os.path.join(path, "tip.csv"))
-
-# Plot the joint and marginal distributions
-sns.jointplot(x='total_bill', y='tip', data=tips)
+# Plot the linear regression with confidence intervals
+sns.regplot(x='total_bill', y='tip', data=tips)
 # Add Title
-plt.title('Joint and Marginal Distribution Example')
+plt.title('Linear Regression with Confidence Intervals')
 # Add Labels
 plt.xlabel('Total Bill')
 plt.ylabel('Tip')
