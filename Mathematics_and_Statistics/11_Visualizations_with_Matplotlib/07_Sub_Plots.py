@@ -7,8 +7,8 @@ import numpy as np
 # Subplots are used to create a grid of plots within a single figure.
 
 # Downlaod data from Yahoo Finance
-ticker = 'ZOMATO.NS'
-start_date = today() - pd.Timedelta(days=365*3)
+ticker = 'MARICO.NS'
+start_date = today() - pd.Timedelta(days=365)
 end_date = today()  # Current date
 
 data = yf.download(ticker, start=start_date, end=end_date)
@@ -24,7 +24,7 @@ axes[0, 0].plot(data['Volume'], label='Volume', color='orange')
 axes[0, 0].set_title('Volume')
 
 # Plot the data in the second subplot
-axes[0, 1].hist(data['Close'], bins=20, color='green', alpha=0.7)
+axes[0, 1].hist(data['Close'], bins=50, color='green', alpha=0.7)
 axes[0, 1].set_title('Stock Price Histogram')
 
 # Plot the data in the third subplot
