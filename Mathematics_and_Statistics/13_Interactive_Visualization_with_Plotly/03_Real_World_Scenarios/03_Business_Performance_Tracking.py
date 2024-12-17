@@ -22,11 +22,11 @@ customer_first_order.columns = ["Customer ID", "First Purchase Date"]
 data = data.merge(customer_first_order, on="Customer ID", how="left")
 data["Is New Customer"] = data["Order Date"] == data["First Purchase Date"]
 
+
+
 churn_data = (
-    data.groupby(["Order Month", "Is New Customer"])["Customer ID"]
-    .nunique()
-    .reset_index()
-)
+    data.groupby(["Order Month", "Is New Customer"])["Customer ID"].nunique().reset_index()
+    )
 churn_data.columns = ["Month", "Is New Customer", "Customer Count"]
 
 fig2 = px.bar(
