@@ -30,8 +30,8 @@ fig.update_layout(  # Update layout
                      ])
                 for country in countries  # Iterate over unique countries
             ],
-            direction="down",  # Set direction
-            showactive=True,  # Set showactive
+            direction="down",  # Set direction.
+            showactive=True,  # Set showactive. The purpose of this is to highlight the active menu item
             x=0.5,  # Set x
             y=1.15,  # Set y
             active=countries.tolist().index(initial_country),  # Set the active menu item
@@ -41,7 +41,7 @@ fig.update_layout(  # Update layout
         dict(  # Create a slider
             steps=[  # Add steps
                 dict(label=str(year),  # Set label
-                     method="update",  # Set method
+                     method="update",  # Set method. The purpose of this is to update the figure
                      args=[
                          {"x": [data[(data['country'] == initial_country) & (data['year'] <= year)]['year']],  # Set x-axis values
                           "y": [data[(data['country'] == initial_country) & (data['year'] <= year)]['lifeExp']]}  #
