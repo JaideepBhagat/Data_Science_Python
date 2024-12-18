@@ -1,95 +1,49 @@
 import yfinance as yf
 import plotly.graph_objects as go
 
-# Fetch stock data
-stock_ticker = 'ZOMATO.NS'  # Replace with your preferred stock symbol
-data = yf.download(stock_ticker, start='2022-01-01', end='2024-12-01', interval='1d')
+def ichimoku_cloud(df):
+    # Calculate Ichimoku Cloud components
+    df['tenkan_sen'] = (df['High'].rolling(window=9).max() + df['Low'].rolling(window=9).min()) / 2
+    df['kijun_sen'] = (df['High'].rolling(window=26).max() + df['Low'].rolling(window=26).min()) / 2
+    df['senkou_span_a'] = ((df['tenkan_sen'] + df['kijun_sen']) / 2).shift(26)
+    df['senkou_span_b'] = ((df['High'].rolling(window=52).max() + df['Low'].rolling(window=52).min()) / 2).shift(26)
+    df['chikou_span'] = df['Close'].shift(-26)
 
-# Flatten column names
-data.columns = [col[0] for col in data.columns]
+    return df
 
-# Debugging data
-print(data.head())  # Check the first few rows
-print(data.info())  # Check for missing data
+# Get stock data
+ticker = 'ZOMATO.NS'
+df = yf.download(ticker, period='1y', interval='1d')
 
-# Drop rows with missing values in key columns
-data.dropna(subset=['Open', 'High', 'Low', 'Close', 'Volume'], inplace=True)
+# Calculate Ichimoku Cloud
+df = ichimoku_cloud(df)
 
-# Calculate moving averages
-data['MA50'] = data['Close'].rolling(window=50).mean()
-data['MA200'] = data['Close'].rolling(window=200).mean()
+# Create candlestick chart with Ichimoku Cloud
+fig = go.Figure(data=[go.Candlestick(x=df.index,
+                    open=df['Open'],
+                    high=df['High'],
+                    low=df['Low'],
+                    close=df['Close'])])
 
-# Identify the highest and lowest price points
-highest_price = data['High'].max()
-lowest_price = data['Low'].min()
+# Add Ichimoku Cloud
+fig.add_trace(go.Scatter(x=df.index, y=df['senkou_span_a'], line=dict(color='rgba(128, 128, 128, 0.5)', width=1), name='Senkou Span A'))
+fig.add_trace(go.Scatter(x=df.index, y=df['senkou_span_b'], line=dict(color='rgba(128, 128, 128, 0.5)', width=1), name='Senkou Span B'))
 
-# Calculate Fibonacci retracement levels
-diff = highest_price - lowest_price
-fib_levels = {
-    "0%": highest_price,
-    "22.6%": highest_price - 0.226 * diff,
-    "38.2%": highest_price - 0.382 * diff,
-    "50%": highest_price - 0.5 * diff,
-    "61.8%": highest_price - 0.618 * diff,
-    "100%": lowest_price,
-}
+# Fill the area between Senkou Span A and Senkou Span B
+fig.add_trace(go.Scatter(x=df.index, y=df['senkou_span_a'], fill='tonexty', fillcolor='rgba(128, 128, 128, 0.2)', line=dict(color='rgba(0,0,0,0)'), name='Ichimoku Cloud'))
+fig.add_trace(go.Scatter(x=df.index, y=df['senkou_span_b'], fill='tonexty', fillcolor='rgba(255, 255, 255, 0.2)', line=dict(color='rgba(0,0,0,0)')))
 
-# Create the figure
-fig = go.Figure()
+# Add Tenkan-sen and Kijun-sen
+fig.add_trace(go.Scatter(x=df.index, y=df['tenkan_sen'], line=dict(color='red', width=1), name='Tenkan-sen'))
+fig.add_trace(go.Scatter(x=df.index, y=df['kijun_sen'], line=dict(color='blue', width=1), name='Kijun-sen'))
 
-# Add candlestick chart
-fig.add_trace(go.Candlestick(
-    x=data.index,
-    open=data['Open'],
-    high=data['High'],
-    low=data['Low'],
-    close=data['Close'],
-    name='Candlesticks',
-    increasing_line_color='green',
-    decreasing_line_color='red'
-))
+# Add Chikou Span
+fig.add_trace(go.Scatter(x=df.index, y=df['chikou_span'], line=dict(color='green', width=1), name='Chikou Span'))
 
-# Add moving averages
-fig.add_trace(go.Scatter(
-    x=data.index, y=data['MA50'],
-    mode='lines', name='50-Day MA',
-    line=dict(color='blue', width=2)
-))
-
-fig.add_trace(go.Scatter(
-    x=data.index, y=data['MA200'],
-    mode='lines', name='200-Day MA',
-    line=dict(color='orange', width=2)
-))
-
-# Add Fibonacci retracement levels
-for level_name, level_value in fib_levels.items():
-    fig.add_hline(
-        y=level_value,
-        line=dict(color='gold', dash='dash'),
-        annotation_text=level_name,
-        annotation_position="right",
-        name=f'Fibonacci {level_name}'
-    )
-
-# # Add volume if available
-# if 'Volume' in data.columns:
-#     fig.add_trace(go.Bar(
-#         x=data.index, y=data['Volume'],
-#         name='Volume', marker_color='purple', opacity=0.4
-#     ))
-# else:
-#     print("Volume data is not available for this stock.")
-
-# Customize layout
+# Customize the plot
 fig.update_layout(
-    title=f'{stock_ticker} Stock Price Analysis with Fibonacci Retracement',
-    xaxis_title='Date',
-    yaxis_title='Price',
-    xaxis_rangeslider_visible=False,
-    template='plotly_dark',
-    legend=dict(x=0.01, y=0.99)
+    title=f'Ichimoku Cloud for {ticker}',
+    xaxis_rangeslider_visible=False
 )
 
-# Show the figure
 fig.show()
