@@ -1,6 +1,6 @@
 # Use libraries like Pandas:
 import pandas as pd
-df = pd.read_csv("Sales.csv")
+df = pd.read_excel("Superstore.xls")
 # Detecting missing values:
 df.isnull().sum()
 # Filling missing values:
@@ -40,10 +40,10 @@ print(f"Standard deviation: {df['Sales'].std()}")
 # Visualizing data:
 # Histogram: Histogram of values
 import matplotlib.pyplot as plt
-plt.hist(df['Sales'])
+plt.hist(df['Sales'], bins=100)
 plt.show()
 # Box plot: Distribution of values
-df['Sales'].plot(kind='box')
+df['Sales'].plot(kind='box',  grid=True, figsize=(8, 6), color='blue')
 plt.show()
 # Kernel density plot: Density of values
 import seaborn as sns
@@ -51,10 +51,29 @@ sns.kdeplot(df['Sales'])
 plt.show()
 
 # Correlation analysis:
-# Scatter plot: Relationship between two variables
-import matplotlib.pyplot as plt
-plt.scatter(df['Sales'], df['Profit'])
+# Show correlation matrix:
+df_filtered = df[['Sales', 'Quantity', 'Discount', 'Profit']]
+correlation_matrix = df_filtered.corr(numeric_only=True)
+print(correlation_matrix)
+
+# Visualize correlations using heatmaps:
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
 plt.show()
-# Correlation coefficient: Strength of relationship
-correlation = df['Sales'].corr(df['Profit'])
-print(f"Correlation coefficient: {correlation}")
+
+# Visualization techniques:
+# Scatter plot: Relationship between two variables
+plt.scatter(df['Sales'], df['Quantity'])
+plt.xlabel('Sales')
+plt.ylabel('Quantity')
+plt.show()
+
+# Pair Plots:
+# Visualize all variable relationships.
+sns.pairplot(df_filtered)
+plt.show()
+
+# Feature Relationship Exploration
+# Grouping and summarizing data:
+grouped_data = df.groupby('Category')['Sales'].sum()
+print(grouped_data)
+
