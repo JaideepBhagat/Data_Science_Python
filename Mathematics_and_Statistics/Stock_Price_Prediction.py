@@ -40,7 +40,7 @@ def predict_next_day(model, last_day_index):
 # Main function
 def main():
     # Parameters
-    ticker = "TRITURBINE.NS"
+    ticker = str(input("Enter the stock ticker symbol: ")) or "IDEA.NS"
     # one year ago as start date
     start_date = today() - pd.Timedelta(days=365)
     # today's date as end date
@@ -57,13 +57,17 @@ def main():
     model = LinearRegression()
     model.fit(X_train, y_train)
 
+    # Evaluate model
+    score = model.score(X_test, y_test)
+    print(f"Model Score: {score:.2f}")
+
     # Predict next trading day's price
     last_day_index = stock_data['Day'].iloc[-1]
     next_price = predict_next_day(model, last_day_index)
 
     # Display results
+    print(f"Previous day index: {last_day_index} and closing price: {stock_data['Close'].iloc[-1]}")
     print(f"Predicted stock price for the next trading day: {next_price.item():.2f}")
-
 
     # Visualization
     plt.figure(figsize=(10, 6))
