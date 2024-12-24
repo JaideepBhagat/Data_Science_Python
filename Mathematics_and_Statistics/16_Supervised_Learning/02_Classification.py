@@ -55,6 +55,6 @@ target_names=["Not Approved", "Approved"]: Maps numerical labels to readable cla
 
 # 4. Make Predictions
 # Example: Predict for a new applicant
-new_applicant = np.array([[5500, 230, ]])  # Income=5500, LoanAmount=230, CreditHistory=1
+new_applicant = np.array([[5500, 230, 1]])  # Income=5500, LoanAmount=230, CreditHistory=1
 approval_status = model.predict(new_applicant)
 print(f"Loan approval status for the new applicant: {'Approved' if approval_status[0] == 1 else 'Not Approved'}")
