@@ -13,7 +13,7 @@ import kagglehub
 
 # Download the dataset
 path = kagglehub.dataset_download("abdallahwagih/spam-emails")
-
+print(path)
 # Read the dataset
 file_path = f"{path}/spam.csv"
 data = pd.read_csv(file_path, encoding='latin-1')
@@ -57,41 +57,41 @@ print("Predictions:", predictions)
 # vectorizer.transform: Converts new text data into the same format as the training data.
 # model.predict: Predicts whether each message is spam or ham.
 
-# Plotting ROC curve
+# # Plotting ROC curve
 import matplotlib.pyplot as plt
-from sklearn.metrics import roc_curve, auc
-fpr, tpr, thresholds = roc_curve(y_test, y_pred)
-# roc_curve: Calculates the false positive rate (FPR) and true positive rate (TPR) for different thresholds.
-roc_auc = auc(fpr, tpr)
-# auc: Calculates the area under the ROC curve.
-plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
-plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title('Receiver Operating Characteristic')
-plt.legend(loc="lower right")
-plt.show()
-
-# Diagnosing Overfitting and Underfitting
-# Using Learning Curves
-from sklearn.model_selection import learning_curve
-
-train_sizes, train_scores, test_scores = learning_curve(model, X, y, cv=5, train_sizes=np.linspace(0.1, 1.0, 10))
-# learning_curve: Generates learning curves for a machine learning model.
-# X: Features
-# y: Target variable
-# cv: Number of cross-validation folds
-# train_sizes: Percentage of training data to use for each iteration
-
-plt.plot(train_sizes, train_scores.mean(axis=1), label='Training Score')
-plt.plot(train_sizes, test_scores.mean(axis=1), label='Validation Score')
-plt.xlabel('Training Size')
-plt.ylabel('Accuracy')
-plt.legend()
-plt.title('Learning Curves')
-plt.show()
+# from sklearn.metrics import roc_curve, auc
+# fpr, tpr, thresholds = roc_curve(y_test, y_pred)
+# # roc_curve: Calculates the false positive rate (FPR) and true positive rate (TPR) for different thresholds.
+# roc_auc = auc(fpr, tpr)
+# # auc: Calculates the area under the ROC curve.
+# plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+# plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+# plt.xlim([0.0, 1.0])
+# plt.ylim([0.0, 1.05])
+# plt.xlabel('False Positive Rate')
+# plt.ylabel('True Positive Rate')
+# plt.title('Receiver Operating Characteristic')
+# plt.legend(loc="lower right")
+# plt.show()
+#
+# # Diagnosing Overfitting and Underfitting
+# # Using Learning Curves
+# from sklearn.model_selection import learning_curve
+#
+# train_sizes, train_scores, test_scores = learning_curve(model, X, y, cv=5, train_sizes=np.linspace(0.1, 1.0, 10))
+# # learning_curve: Generates learning curves for a machine learning model.
+# # X: Features
+# # y: Target variable
+# # cv: Number of cross-validation folds
+# # train_sizes: Percentage of training data to use for each iteration
+#
+# plt.plot(train_sizes, train_scores.mean(axis=1), label='Training Score')
+# plt.plot(train_sizes, test_scores.mean(axis=1), label='Validation Score')
+# plt.xlabel('Training Size')
+# plt.ylabel('Accuracy')
+# plt.legend()
+# plt.title('Learning Curves')
+# plt.show()
 
 # Using Validation Curves
 from sklearn.model_selection import validation_curve

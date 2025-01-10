@@ -42,7 +42,7 @@ def main():
     # Parameters
     ticker = str(input("Enter the stock ticker symbol: ")) + ".NS"
     # one year ago as start date
-    start_date = today() - pd.Timedelta(days=365*5)
+    start_date = today() - pd.Timedelta(days=30)
     # today's date as end date
     end_date = today()
 
