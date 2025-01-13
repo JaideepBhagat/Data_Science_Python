@@ -4,7 +4,7 @@ from pyspark.sql.functions import col, when, lower, regexp_replace, count  # Use
 from pyspark.ml.feature import Tokenizer, StopWordsRemover, CountVectorizer, IDF  #Modules for text processing.
 from pyspark.ml.classification import LogisticRegression  # Module for Logistic Regression.
 from pyspark.ml import Pipeline  # Automates machine learning workflows.
-from pyspark.ml.evaluation import MulticlassClassificationEvaluator  # Evaluates classification models.
+from pyspark.ml.evaluation import MulticlassClassificationEvaluator as mcce  # Evaluates classification models.
 
 
 # Step 1: Download the Dataset
@@ -87,7 +87,7 @@ predictions = model.transform(test_data)
 predictions.select("cleaned_review", "sentiment", "prediction").show(5)
 
 # Evaluate using MulticlassClassificationEvaluator
-evaluator = MulticlassClassificationEvaluator(
+evaluator = mcce(
     labelCol="sentiment", predictionCol="prediction", metricName="accuracy"
 )
 accuracy = evaluator.evaluate(predictions)
